@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popup } from 'semantic-ui-react';
-import './Estimate.css';
+import styles from './Estimate.module.css';
 
 type EstimateProps = {
     estimate: number
@@ -11,7 +11,7 @@ export default function Estimate({estimate}: EstimateProps) {
         <Popup
             content="Estimate for this ticket"
             trigger={
-                <div className="container">
+                <div className={styles.container}>
                 <p>{estimate}</p>
                 </div>}></Popup>
     )

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Divider, Header } from 'semantic-ui-react';
-import './BoardHeader.css';
+import styles from './BoardHeader.module.css';
 
 export default function BoardHeader() {
     return (
-        <div className="main">
+        <div className={styles.main}>
             <Header size="huge">Kanban Board</Header>
             <Divider fitted></Divider>
         </div>

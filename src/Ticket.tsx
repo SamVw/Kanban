@@ -14,7 +14,7 @@ type TicketProps = {
 
 export default function Ticket({id, title, estimate, user}: TicketProps) {
     return (
-        <Card>
+        <Card fluid>
             <Card.Content>
                 <Card.Header>Ticket Id {id}</Card.Header>
                 <Card.Description>{title}</Card.Description>
