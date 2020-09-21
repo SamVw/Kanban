@@ -1,0 +1,12 @@
+/* .bottomRow {
+    display: flex;
+    justify-self: flex-end; */
+/* } */
+
+.buttons {
+    float: right;
+}
+
+.buttons > * {
+    margin-top: 7px !important;
+}

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Button, Card, Icon, Image } from 'semantic-ui-react';
 import { JsxElement } from 'typescript';
 import Avatar from './Avatar';
 import Estimate from './Estimate'
-import { User } from './models/user';
+import { User } from './models/User';
+import styles from './Ticket.module.css';
 
 type TicketProps = {
     id: number,
@@ -16,12 +17,16 @@ export default function Ticket({id, title, estimate, user}: TicketProps) {
     return (
         <Card fluid>
             <Card.Content>
+                <Avatar name={user.name} source={user.avatar}></Avatar>
                 <Card.Header>Ticket Id {id}</Card.Header>
                 <Card.Description>{title}</Card.Description>
             </Card.Content>
-            <Card.Content extra>
+            <Card.Content extra className={styles.bottomRow}>
                 <Estimate estimate={estimate}></Estimate>
-                <Avatar name={user.name} source={user.avatar}></Avatar>
+                <Card.Group className={styles.buttons}>
+                    <Button icon><Icon color="red" name="trash"></Icon></Button>
+                    <Button icon><Icon color="blue" name="edit"></Icon></Button>
+                </Card.Group>
             </Card.Content>
         </Card>
     );
