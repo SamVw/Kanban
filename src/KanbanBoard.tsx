@@ -6,6 +6,7 @@ import './KanbanBoard.css';
 import { Column } from './models/Column';
 import { KanbanStatus } from './models/KanbanStatus';
 import { Ticket } from './models/Ticket';
+import { User } from './models/User';
 
 interface IProps {
 
@@ -13,7 +14,8 @@ interface IProps {
 
 interface IState {
     columns: Column[],
-    tickets: Ticket[]
+    tickets: Ticket[],
+    loggedInUser: User
 }
 
 class KanbanBoard extends Component<IProps, IState> {
@@ -21,6 +23,28 @@ class KanbanBoard extends Component<IProps, IState> {
         super(props);
         this.state = ({
             columns: columns.sort((a: Column, b: Column) => a.order - b.order),
+            tickets: tickets,
+            loggedInUser: {
+                id: 2,
+                avatar: '',
+                name: 'logged in dude'
+            }
+        })
+
+        this.handleNewTicket = this.handleNewTicket.bind(this);
+    }
+
+    handleNewTicket(ticket: Ticket) {
+        const tickets = this.state.tickets.slice();
+
+        const biggestId = tickets.sort((a, b) => a.id - b.id)[tickets.length - 1].id;
+
+        ticket.id = biggestId + 1;
+        ticket.user = this.state.loggedInUser;
+
+        tickets.push(ticket);
+
+        this.setState({
             tickets: tickets
         })
     }
@@ -28,7 +52,7 @@ class KanbanBoard extends Component<IProps, IState> {
     render() {
         return (
             <div className="main">
-                <BoardHeader></BoardHeader>
+                <BoardHeader onSubmitTicket={this.handleNewTicket}></BoardHeader>
                 <div className="column-container">
                     {this.state.columns.map(c => {
                         return (

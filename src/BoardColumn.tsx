@@ -10,11 +10,15 @@ interface BoardColumnProps {
     tickets: TicketEntity[]
 }
 
-export default function BoardColumn({columnName}: BoardColumnProps) {
+export default function BoardColumn({columnName, tickets}: BoardColumnProps) {
     return (
         <Container className={styles.container}>
             <BoardColumnHeader name={columnName}></BoardColumnHeader>
-            <Ticket id={1} title="New feature..." estimate={1} user={{ id: 1, name: 'Sam Vanwelsenaere', avatar:"https://react.semantic-ui.com/images/wireframe/square-image.png"}}></Ticket>
+            {tickets.map(t => {
+                return (
+                    <Ticket key={t.id} id={t.id} title={t.description} estimate={t.estimate} user={t.user}></Ticket>
+                )
+            })}
         </Container>
     )
 }
