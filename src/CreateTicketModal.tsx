@@ -51,9 +51,18 @@ export default class CreateTicketModal extends React.Component<CreateTicketModal
         } as Pick<CreateTicketModalState,any>)
     }
 
+    setInitialState() {
+        this.setState({
+            description: '',
+            estimate: 0,
+            open: false
+        });
+    }
+
     render() {
         return (
             <Modal
+                onUnmount={() => this.setInitialState()}
                 size="tiny"
                 onClose={() => this.setState({open: false})}
                 onOpen={() => this.setState({open: true})}
