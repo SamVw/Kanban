@@ -1,18 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Ticket from './Ticket';
 import 'semantic-ui-css/semantic.min.css'
 import KanbanBoard from './KanbanBoard';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
     return (
       <div className="App">
-        <KanbanBoard></KanbanBoard>
+        <DndProvider backend={HTML5Backend}><KanbanBoard></KanbanBoard></DndProvider>
       </div>
     );
 }
 
 export default App;
-
-{/* <Ticket id={1} title="New feature..." estimate={1} user={{ name: 'Sam Vanwelsenaere', avatar:"https://react.semantic-ui.com/images/wireframe/square-image.png"}}></Ticket> */}

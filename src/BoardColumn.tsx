@@ -4,21 +4,37 @@ import BoardColumnHeader from './BoardColumnHeader';
 import styles from './BoardColumn.module.css';
 import { Ticket as TicketEntity } from './models/Ticket';
 import Ticket from './Ticket';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from './KanbanBoard';
 
 interface BoardColumnProps {
     columnName: string,
-    tickets: TicketEntity[]
+    tickets: TicketEntity[],
+    position: number,
+    onDrop: (position: number, ticketId: number) => void
 }
 
-export default function BoardColumn({columnName, tickets}: BoardColumnProps) {
+export default function BoardColumn({columnName, tickets, position, onDrop}: BoardColumnProps) {
+    const [{canDrop, isOver}, drop] = useDrop({
+        accept: ItemTypes.Ticket,
+        canDrop: (item: { type: string; ticket: number; ticketPosition: number }) => position - item.ticketPosition === 1 || position - item.ticketPosition === -1,
+        drop: (item: { type: string; ticket: number; }) => onDrop(position, item.ticket),
+        collect: monitor => ({
+            canDrop: monitor.canDrop(),
+            isOver: monitor.isOver()
+        })
+    });
+
     return (
-        <Container className={styles.container}>
+        <Container className={`${styles.container}`}>
             <BoardColumnHeader name={columnName}></BoardColumnHeader>
-            {tickets.map(t => {
-                return (
-                    <Ticket key={t.id} id={t.id} title={t.description} estimate={t.estimate} user={t.user}></Ticket>
-                )
-            })}
+            <div ref={drop} className={`${styles.boardColumnBody} ${!canDrop && isOver ? styles.dropForbidden : styles.none} ${canDrop && isOver ? styles.dropAllowed : styles.none}` }>
+                {tickets.map(t => {
+                    return (
+                        <Ticket key={t.id} id={t.id} title={t.description} estimate={t.estimate} user={t.creator} position={t.status}></Ticket>
+                    )
+                })}
+            </div>
         </Container>
     )
 }

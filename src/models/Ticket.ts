@@ -6,5 +6,6 @@ export interface Ticket {
     description: string,
     estimate: number,
     status: KanbanStatus,
-    user: User
+    assignee: User | null,
+    creator: User
 }

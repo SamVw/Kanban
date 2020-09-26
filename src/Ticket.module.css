@@ -10,3 +10,7 @@
 .buttons > * {
     margin-top: 7px !important;
 }
+
+.ticketContainer {
+    margin-bottom: 15px;
+}

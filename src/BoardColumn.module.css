@@ -8,3 +8,22 @@
 .container:last-child {
     border-right: 0;
 }
+
+.boardColumnBody {
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
+.dropForbidden {
+    opacity: 0.5;
+    background-color: #D01919;
+}
+
+.dropAllowed {
+    opacity: 0.5;
+    background-color: #16AB39;
+}
+
+.none {
+
+}

@@ -3,7 +3,7 @@ import { Card, Image, Popup } from 'semantic-ui-react';
 
 type AvatarProps = {
     name: string,
-    source: string
+    source: string,
 };
 
 export default function Avatar({name, source}: AvatarProps) {

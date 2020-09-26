@@ -23,7 +23,7 @@ export default class CreateTicketModal extends React.Component<CreateTicketModal
         this.state = {
             open: false,
             description: '',
-            estimate: 0
+            estimate: 1
         }
 
         this.handleFormChange = this.handleFormChange.bind(this);
@@ -36,7 +36,8 @@ export default class CreateTicketModal extends React.Component<CreateTicketModal
             description: this.state.description,
             estimate: this.state.estimate,
             status: KanbanStatus.ToDo,
-            user: { id: 0, name: '', avatar: ''}
+            creator: { id: 0, name: '', avatar: ''},
+            assignee: null
         }
         this.props.onSubmit(ticket);
 
@@ -54,7 +55,7 @@ export default class CreateTicketModal extends React.Component<CreateTicketModal
     setInitialState() {
         this.setState({
             description: '',
-            estimate: 0,
+            estimate: 1,
             open: false
         });
     }
@@ -77,7 +78,7 @@ export default class CreateTicketModal extends React.Component<CreateTicketModal
                             </Form.Field>
                             <Form.Field>
                                 <label>Estimate</label>
-                                <Form.Input type="number" name="estimate" value={this.state.estimate} onChange={this.handleFormChange} />
+                                <Form.Input type="number" name="estimate" min="1" value={this.state.estimate} onChange={this.handleFormChange} />
                             </Form.Field>
                         </Form>
                     </Modal.Content>
