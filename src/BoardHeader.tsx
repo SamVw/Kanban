@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Divider, Header, Icon } from 'semantic-ui-react';
 import styles from './BoardHeader.module.css';
-import CreateTicketModal from './CreateTicketModal';
+import CreateEditTicketModal from './CreateEditTicketModal';
 import { Ticket } from './models/Ticket';
 import { User } from './models/User';
 
@@ -14,7 +14,7 @@ export default function BoardHeader({onSubmitTicket}:  BoardHeaderProps) {
         <div className={styles.main}>
             <div className={styles.header}>
                 <Header as="h1" size="huge">Kanban Board</Header>
-                <CreateTicketModal trigger={<Button primary><Icon name="add"></Icon>New Ticket</Button>} onSubmit={onSubmitTicket}></CreateTicketModal>
+                <CreateEditTicketModal trigger={<Button primary><Icon name="add"></Icon>New Ticket</Button>} onSubmit={onSubmitTicket}></CreateEditTicketModal>
             </div>
             <Divider fitted></Divider>
         </div>

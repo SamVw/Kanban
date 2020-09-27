@@ -28,12 +28,21 @@ class KanbanBoard extends Component<IProps, IState> {
 
         this.handleNewTicket = this.handleNewTicket.bind(this);
         this.handleDrop = this.handleDrop.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     handleNewTicket(ticket: Ticket) {
+        console.log(ticket);
         const tickets = this.state.tickets.slice();
 
-        const biggestId = tickets.sort((a, b) => a.id - b.id)[tickets.length - 1].id;
+        let biggestId: number;
+        if (tickets.length > 0) {
+            const sortedTickets = tickets.sort((a, b) => a.id - b.id);
+            biggestId = sortedTickets[sortedTickets.length - 1].id;
+        } else {
+            biggestId = 0;
+        }
 
         ticket.id = biggestId + 1;
         ticket.creator = this.state.loggedInUser;
@@ -59,18 +68,39 @@ class KanbanBoard extends Component<IProps, IState> {
         });
     }
 
+    handleDelete(id: number) {
+        let tickets = this.state.tickets.slice();
+
+        tickets = tickets.filter(t => t.id !== id);
+
+        this.setState({
+            tickets: tickets
+        });
+    }
+
+    handleUpdate(ticket: Ticket) {
+        const tickets = this.state.tickets.slice();
+
+        const index = tickets.findIndex(t => t.id === ticket.id);
+        if (index !== -1) {
+            tickets[index] = ticket;
+        }
+
+        this.setState({tickets: tickets});
+    }
+
     render() {
         return (
-                <div className="main">
-                    <BoardHeader onSubmitTicket={this.handleNewTicket}></BoardHeader>
-                    <div className="column-container">
-                        {this.state.columns.map(c => {
-                            return (
-                                <BoardColumn key={c.id} position={c.position} tickets={this.state.tickets.filter(t => t.status === c.status)} columnName={c.name} onDrop={this.handleDrop}></BoardColumn>
-                            )
-                        })}
-                    </div>
+            <div className="main">
+                <BoardHeader onSubmitTicket={this.handleNewTicket}></BoardHeader>
+                <div className="column-container">
+                    {this.state.columns.map(c => {
+                        return (
+                            <BoardColumn key={c.id} position={c.position} tickets={this.state.tickets.filter(t => t.status === c.status)} columnName={c.name} onDrop={this.handleDrop} onDelete={this.handleDelete} onUpdate={this.handleUpdate}></BoardColumn>
+                        )
+                    })}
                 </div>
+            </div>
         );
     }
 }
