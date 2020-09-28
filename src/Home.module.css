@@ -1,0 +1,13 @@
+.container {
+    color: white;
+    background-color: rgb(168, 167, 167);
+    padding: 30px;
+    border-radius: 5px;
+    height: 180px;
+    align-self: center;
+}
+
+.pageContainer {
+    display: flex;
+    justify-content: center;
+}

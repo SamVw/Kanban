@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
-import { Button, Card, Icon, Image } from 'semantic-ui-react';
-import { JsxElement } from 'typescript';
+import React from 'react';
+import { useDrag } from 'react-dnd';
+import { Button, Card, Icon } from 'semantic-ui-react';
 import Avatar from './Avatar';
 import ConfirmButton from './ConfirmButton';
 import CreateEditTicketModal from './CreateEditTicketModal';
 import Estimate from './Estimate'
 import { ItemTypes } from './KanbanBoard';
 import { Ticket as TicketModel } from './models/Ticket';
-import { User } from './models/User';
 import styles from './Ticket.module.css';
 
 type TicketProps = {

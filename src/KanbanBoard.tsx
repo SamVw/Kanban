@@ -86,12 +86,12 @@ class KanbanBoard extends Component<IProps, IState> {
             tickets[index] = ticket;
         }
 
-        this.setState({tickets: tickets});
+        this.setState({ tickets: tickets });
     }
 
     render() {
         return (
-            <div className="main">
+            <div className="page-width">
                 <BoardHeader onSubmitTicket={this.handleNewTicket}></BoardHeader>
                 <div className="column-container">
                     {this.state.columns.map(c => {

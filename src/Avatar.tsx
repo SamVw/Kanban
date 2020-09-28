@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Image, Popup } from 'semantic-ui-react';
+import { Image, Popup } from 'semantic-ui-react';
 
 type AvatarProps = {
     name: string,

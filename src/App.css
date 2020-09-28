@@ -3,3 +3,10 @@
   justify-content: center;
   min-height: 100vh;
 }
+
+.page-width {
+    width: 1200px;
+    background-color: rgba(238, 238, 238, 0.2);
+    padding-left: 10px;
+    padding-right: 10px;
+}
