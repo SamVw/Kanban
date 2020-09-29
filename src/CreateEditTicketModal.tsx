@@ -1,10 +1,7 @@
-import { render } from '@testing-library/react';
-import React, { Component, useReducer, useState } from 'react';
-import { Button, Form, Icon, Input, InputOnChangeData, Modal } from 'semantic-ui-react';
-import styles from './CreateTicketModal.module.css';
+import React, { useState } from 'react';
+import { Button, Form, InputOnChangeData, Modal } from 'semantic-ui-react';
 import { KanbanStatus } from './models/KanbanStatus';
 import { Ticket } from './models/Ticket';
-import { User } from './models/User';
 
 interface CreateEditTicketModalProps {
     trigger: JSX.Element,
@@ -17,7 +14,7 @@ interface Form {
     estimate: number
 }
 
-export default function CreateEditTicketModal({trigger, ticket = undefined, onSubmit}: CreateEditTicketModalProps) {
+export default function CreateEditTicketModal({ trigger, ticket = undefined, onSubmit }: CreateEditTicketModalProps) {
     const [ticketState, setTicket] = useState(ticket ? ticket : initialState());
     const [open, setOpen] = useState(false);
 
@@ -27,7 +24,7 @@ export default function CreateEditTicketModal({trigger, ticket = undefined, onSu
     }
 
     function handleFormChange(e: React.ChangeEvent<HTMLInputElement>, data: InputOnChangeData) {
-        const t = {...ticketState} as any;
+        const t = { ...ticketState } as any;
         t[e.target.name] = data.value;
         setTicket(t);
     }
@@ -51,23 +48,23 @@ export default function CreateEditTicketModal({trigger, ticket = undefined, onSu
             onOpen={() => setOpen(true)}
             open={open}
             trigger={trigger}>
-                <Modal.Header>Create New Ticket</Modal.Header>
-                <Modal.Content>
-                    <Form>
-                        <Form.Field>
-                            <label>Description</label>
-                            <Form.Input placeholder="Description" name='description' value={ticketState.description} onChange={handleFormChange} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Estimate</label>
-                            <Form.Input type="number" name="estimate" min="1" value={ticketState.estimate} onChange={handleFormChange} />
-                        </Form.Field>
-                    </Form>
-                </Modal.Content>
-                <Modal.Actions>
-                    <Button color="black" onClick={() => setOpen(false)}>Cancel</Button>
-                    <Button color="green" onClick={handleSubmit}>Submit</Button>
-                </Modal.Actions>
+            <Modal.Header>{ticket ? 'Edit' : 'Create'} New Ticket</Modal.Header>
+            <Modal.Content>
+                <Form>
+                    <Form.Field>
+                        <label>Description</label>
+                        <Form.Input placeholder="Description" name='description' value={ticketState.description} onChange={handleFormChange} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Estimate</label>
+                        <Form.Input type="number" name="estimate" min="1" value={ticketState.estimate} onChange={handleFormChange} />
+                    </Form.Field>
+                </Form>
+            </Modal.Content>
+            <Modal.Actions>
+                <Button color="black" onClick={() => setOpen(false)}>Cancel</Button>
+                <Button color="green" onClick={handleSubmit}>Submit</Button>
+            </Modal.Actions>
         </Modal>
     );
 }
